@@ -3,9 +3,8 @@ var alt = require('../alt');
 var WorkoutActions = require('../actions/WorkoutActions');
 
 class WorkoutStore {
-
   constructor() {
-    this.exercises = [{name: 'Bench', sets: []}];
+    this.exercises = [];
     this.startDate = new Date();
     this.counter = 0;
 

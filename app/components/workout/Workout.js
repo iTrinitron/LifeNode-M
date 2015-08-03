@@ -1,14 +1,14 @@
 import WorkoutStore from '../../stores/WorkoutStore';
-
 import React from 'react';
-
 import connectToStores from 'alt/utils/connectToStores';
-
 import WorkoutActions from '../../actions/WorkoutActions';
-
 import { Link } from 'react-router';
 
 class AddSetForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
   handleClick() {
     var reps = this.refs.reps.getDOMNode().value;
     var weight = this.refs.weight.getDOMNode().value;
@@ -20,7 +20,7 @@ class AddSetForm extends React.Component {
         <form>
           <label>Weight</label><input ref="weight" type="number" />
           <label>Reps</label><input ref="reps" type="number" />
-          <button onClick={this.handleClick}>Add</button>
+          <button type="button" onClick={this.handleClick}>Add</button>
         </form>
       </div>
       );
@@ -50,13 +50,14 @@ class ExerciseNode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {showAddSet: false};
-    console.log("My props: ");
-    console.log(this.props);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeExercise = this.removeExercise.bind(this);
   }
   removeExercise(event) {
     WorkoutActions.removeExercise(this.props.test);
   }
-  handleClick(event) {
+  handleClick() {
     this.setState({showAddSet: !this.state.showAddSet});
   }
   handleSubmit(reps, weight) {

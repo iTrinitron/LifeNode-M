@@ -513,10 +513,11 @@ var _reactRouter = require('react-router');
 var AddSetForm = (function (_React$Component) {
   _inherits(AddSetForm, _React$Component);
 
-  function AddSetForm() {
+  function AddSetForm(props) {
     _classCallCheck(this, AddSetForm);
 
-    _get(Object.getPrototypeOf(AddSetForm.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(AddSetForm.prototype), 'constructor', this).call(this, props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   _createClass(AddSetForm, [{
@@ -549,7 +550,7 @@ var AddSetForm = (function (_React$Component) {
           _react2['default'].createElement('input', { ref: 'reps', type: 'number' }),
           _react2['default'].createElement(
             'button',
-            { onClick: this.handleClick },
+            { type: 'button', onClick: this.handleClick },
             'Add'
           )
         )
@@ -614,8 +615,9 @@ var ExerciseNode = (function (_React$Component3) {
 
     _get(Object.getPrototypeOf(ExerciseNode.prototype), 'constructor', this).call(this, props);
     this.state = { showAddSet: false };
-    console.log("My props: ");
-    console.log(this.props);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.removeExercise = this.removeExercise.bind(this);
   }
 
   _createClass(ExerciseNode, [{
@@ -625,7 +627,7 @@ var ExerciseNode = (function (_React$Component3) {
     }
   }, {
     key: 'handleClick',
-    value: function handleClick(event) {
+    value: function handleClick() {
       this.setState({ showAddSet: !this.state.showAddSet });
     }
   }, {
@@ -1153,7 +1155,7 @@ var WorkoutStore = (function () {
   function WorkoutStore() {
     _classCallCheck(this, WorkoutStore);
 
-    this.exercises = [{ name: 'Bench', sets: [] }];
+    this.exercises = [];
     this.startDate = new Date();
     this.counter = 0;
 
