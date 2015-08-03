@@ -1,5 +1,6 @@
+/*
 import React from 'react';
-import {Route, DefaultRoute} from 'react-router';
+import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
 
 import App from './components/App';
@@ -14,7 +15,6 @@ import Workout from './components/workout/Workout.js';
 import ExerciseSearch from './components/exercise/ExerciseSearch.js';
 
 var routes = (
-  <Route handler={App}>
     <Route name="home" path='/' handler={LifeApp}>
         <DefaultRoute name="appList" handler={AppList} />
 
@@ -26,7 +26,37 @@ var routes = (
         
         
     </Route>
-  </Route>
 );
+*/
 
-export default routes;
+
+//OLD VERSION
+
+import React from 'react';
+import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
+import App from './components/LifeApp';
+
+import Home from './components/AppList';
+
+//This has the error
+import WorkoutApp from './components/workout/WorkoutApp.js';
+import WorkoutHome from './components/workout/WorkoutHome.js';
+import Workout from './components/workout/Workout.js';
+import ExerciseSearch from './components/exercise/ExerciseSearch.js';
+
+export default (
+  <Route name="home" path='/' handler={App}>
+    <DefaultRoute handler={Home} />
+    <Route name="workout" path='workout-app/' handler={WorkoutApp}>
+        <DefaultRoute name="workoutHome" handler={WorkoutHome} />
+        <Route name="currentWorkout" path="workout" handler={Workout} />
+        <Route name="exerciseSearch" handler={ExerciseSearch} />
+    </Route>
+  </Route>
+); 
+
+/*
+export default (
+  <Route name="home" path='/' handler={App}>
+  </Route>
+); */

@@ -1,5 +1,5 @@
 import React from 'react';
-var AppNode = require('./AppNode.jsx');
+import AppNode from './AppNode.js';
 
 var appList = [
   { name: "Workout", route: "workout"}

@@ -1,11 +1,11 @@
 var WorkoutStore = require('../../stores/WorkoutStore');
 
 var React = require('react');
-var AltContainer = require('alt/AltContainer');
+import AltContainer from 'alt/AltContainer';
 
-var WorkoutActions = require('../../actions/WorkoutActions');
+import WorkoutActions from '../../actions/WorkoutActions';
 
-var { Link } = require('react-router');
+import { Link } from 'react-router';
 
 var AddSetForm = React.createClass({
   handleClick: function() {
