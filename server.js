@@ -3,12 +3,23 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
+//Database Config
+var config = require('./config');
+var mongoose = require('mongoose');
+
 var swig  = require('swig');
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./app/routes');
 
 var app = express();
+
+var Character = require('./models/workouts');
+
+mongoose.connect(config.database);
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
+});
 
 app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));

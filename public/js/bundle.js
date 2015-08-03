@@ -1164,12 +1164,6 @@ var WorkoutStore = (function () {
       removeExercise: WorkoutActions.REMOVE_EXERCISE,
       addSet: WorkoutActions.ADD_SET
     });
-    /*
-        this.exportPublicMethods({
-          getLocation: this.getLocation
-        });
-    
-        this.exportAsync(LocationSource);*/
   }
 
   _createClass(WorkoutStore, [{
