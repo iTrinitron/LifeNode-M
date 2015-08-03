@@ -3,6 +3,9 @@
   "description": "Life App",
   "version": "1.0.0",
   "main": "server.js",
+  "babel": {
+    "stage": 1
+  },
   "scripts": {
     "start": "babel-node server.js",
     "watch": "nodemon --exec babel-node -- server.js"

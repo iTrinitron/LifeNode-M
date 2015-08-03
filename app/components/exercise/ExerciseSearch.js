@@ -1,7 +1,8 @@
 import ExerciseStore from '../../stores/ExerciseStore';
 
 import React from 'react';
-import AltContainer from 'alt/AltContainer';
+
+import connectToStores from 'alt/utils/connectToStores';
 
 var ExerciseActions = require('../../actions/ExerciseActions');
 
@@ -43,32 +44,40 @@ var AddExercise = React.createClass({
 	}
 })
 
-var ExerciseSearch = React.createClass({
-	getInitialState: function() {
-		return {
-			search: "",
-			showAddExercise: false
-		}
-	},
-	search: function(input) {
+@connectToStores
+class ExerciseSearch extends React.Component {
+	constructor(props) {
+		super(props);
+    	this.state = {showAddExercise: false, search: ""}
+    	this.search = this.search.bind(this);
+  	}
+
+  	static getStores() {
+	    return [ExerciseStore];
+	  }
+
+	  static getPropsFromStores() {
+	    return ExerciseStore.getState();
+	  }
+
+	search(input) {
 		this.setState({showAddExercise: false});
 		if(input != "") {
 			this.setState({showAddExercise: true});
 		}
 		this.setState({search: input});
 		ExerciseActions.fetchExercises(input);
-	},	
-	render: function() {
+	}
+
+	render() {
 		return (
 			<div>
-		        <AltContainer store={ExerciseStore}>
-		        	<SearchBox handleChange={this.search}/>
-		        	<AddExercise name={this.state.search} visible={this.state.showAddExercise} />
-		        	<ExerciseList />
-		        </AltContainer>
+	        	<SearchBox handleChange={this.search}/>
+	        	<AddExercise name={this.state.search} visible={this.state.showAddExercise} />
+	        	<ExerciseList {...this.props} />
 		     </div>
 		);
 	}
-});
+}
 
-module.exports = ExerciseSearch;
+export default ExerciseSearch;

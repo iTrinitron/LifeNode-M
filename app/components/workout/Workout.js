@@ -1,19 +1,20 @@
-var WorkoutStore = require('../../stores/WorkoutStore');
+import WorkoutStore from '../../stores/WorkoutStore';
 
-var React = require('react');
-import AltContainer from 'alt/AltContainer';
+import React from 'react';
+
+import connectToStores from 'alt/utils/connectToStores';
 
 import WorkoutActions from '../../actions/WorkoutActions';
 
 import { Link } from 'react-router';
 
-var AddSetForm = React.createClass({
-  handleClick: function() {
+class AddSetForm extends React.Component {
+  handleClick() {
     var reps = this.refs.reps.getDOMNode().value;
     var weight = this.refs.weight.getDOMNode().value;
     this.props.onSetSubmit(reps, weight);
-  },
-  render: function() {
+  }
+  render() {
     return (
       <div className={this.props.visible ? '' : 'hidden'}>
         <form>
@@ -24,10 +25,10 @@ var AddSetForm = React.createClass({
       </div>
       );
   }
-});
+}
 
-var SetList = React.createClass({
-  render: function() {
+class SetList extends React.Component {
+  render() {
     return (
       <div className="workout-list">
         {this.props.sets.map((set, i) => {
@@ -43,24 +44,25 @@ var SetList = React.createClass({
       </div>
       );
   }
-});
+}
 
-var ExerciseNode = React.createClass({
-  getInitialState: function() {
-    return {
-      showAddSet: false
-    };
-  },
-  removeExercise: function(event) {
+class ExerciseNode extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showAddSet: false};
+    console.log("My props: ");
+    console.log(this.props);
+  }
+  removeExercise(event) {
     WorkoutActions.removeExercise(this.props.test);
-  },
-  handleClick: function(event) {
+  }
+  handleClick(event) {
     this.setState({showAddSet: !this.state.showAddSet});
-  },
-  handleSubmit: function(reps, weight) {
+  }
+  handleSubmit(reps, weight) {
     WorkoutActions.addSet(this.props.test, reps, weight);
-  },
-  render: function() {
+  }
+  render() {
     return (
       <div>
         <div className="block">
@@ -75,10 +77,11 @@ var ExerciseNode = React.createClass({
       </div>
     );
   }
-});
+}
 
-var ExerciseList = React.createClass({
-  render: function() {
+class ExerciseList extends React.Component {
+  render() {
+    console.log(this.props);
     return (
       <div>
         {this.props.exercises.map((exercise, i) => {
@@ -89,43 +92,49 @@ var ExerciseList = React.createClass({
       </div>
     );
   }
-});
+}
 
-var Title = React.createClass({
-  render: function() {
+class Title extends React.Component {
+  render() {
     return (
       <div className="block head full">Workout 1 - {this.props.startDate.toTimeString()}</div>
-      
     );
   }
-});
+}
 
-var Workout = React.createClass({
-  getInitialState: function() {
-    return {
-      hello: "test"
-    };
-  },
-  componentDidMount: function() {
+@connectToStores
+class Workout extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  static getStores() {
+    return [WorkoutStore];
+  }
+
+  static getPropsFromStores() {
+    return WorkoutStore.getState();
+  }
+
+  componentDidMount() {
     //LocationStore.fetchLocations();
-  },
-  handleClick: function(event) {
+  }
+  handleClick(event) {
     WorkoutActions.addExercise("Push ups");
-  },
+  }
 
-  render: function() {
-    var test = this.state.hello;
+  render() {
+    console.log(this.state);
+    console.log(this.props);
     return (
       <div>
-        <AltContainer store={WorkoutStore}>
-          <Title />
-          <ExerciseList />
+          <Title {...this.props} />
+          <ExerciseList {...this.props}  />
           <div className="block" onClick={this.handleClick}>Add Exercise <i className="fa fa-plus fa-2x"></i></div> 
-          <Link to="exerciseSearch"><div className="block">Add Exercise </div></Link>    
-        </AltContainer>
+          <Link to="exerciseSearch"><div className="block">Add Exercise </div></Link>  
       </div>
     );
   }
-}); 
+} 
 
-module.exports = Workout;
+export default Workout;

@@ -5,7 +5,7 @@ var WorkoutActions = require('../actions/WorkoutActions');
 class WorkoutStore {
 
   constructor() {
-    this.exercises = [];
+    this.exercises = [{name: 'Bench', sets: []}];
     this.startDate = new Date();
     this.counter = 0;
 

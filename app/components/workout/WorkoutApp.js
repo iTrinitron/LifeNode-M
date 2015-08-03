@@ -19,7 +19,7 @@ class WorkoutApp extends React.Component {
     return (
     	<div>
           <RouteHandler />
-        </div>
+      </div>
     );
   }
 }; 

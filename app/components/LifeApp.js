@@ -1,10 +1,10 @@
 import React from 'react';
 import { RouteHandler, Link } from 'react-router';
 
-//var Header = require('./Header.jsx');
-//var Footer = require('./Footer.jsx');
+var Header = require('./Header.jsx');
+var Footer = require('./Footer.jsx');
 
-/*class LifeApp extends React.Component {
+class LifeApp extends React.Component {
   render() {
     return (
       <div>
@@ -15,19 +15,7 @@ import { RouteHandler, Link } from 'react-router';
       </div>
     );
   }
-} 
-*/
-
-class LifeApp extends React.Component {
-  render() {
-    return (
-      <div>
-        <RouteHandler />
-        <div className="clear"></div>
-      </div>
-    );
-  }
-} 
+}
 
 
 export default LifeApp;

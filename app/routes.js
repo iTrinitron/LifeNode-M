@@ -47,13 +47,18 @@ import ExerciseSearch from './components/exercise/ExerciseSearch.js';
 export default (
   <Route name="home" path='/' handler={App}>
     <DefaultRoute handler={Home} />
-    <Route name="workout" path='workout-app/' handler={WorkoutApp}>
+    <Route name="workout" path='workout-app' handler={WorkoutApp}>
         <DefaultRoute name="workoutHome" handler={WorkoutHome} />
+
         <Route name="currentWorkout" path="workout" handler={Workout} />
-        <Route name="exerciseSearch" handler={ExerciseSearch} />
+        <Route name="exerciseSearch" handler={ExerciseSearch} /> 
     </Route>
   </Route>
-); 
+);
+
+//
+        //<Route name="currentWorkout" path="workout" handler={Workout} />
+        //<Route name="exerciseSearch" handler={ExerciseSearch} /> 
 
 /*
 export default (
