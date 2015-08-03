@@ -36,6 +36,9 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+//var api = require('api');
+//app.use('/api', api);
+
 //Expresss Routes
 
 //Server-side render of React
