@@ -18,7 +18,6 @@ var routes = require('./app/routes');
 var app = express();
 
 /* MODELS */
-var Character = require('./models/workouts');
 
 //Connect to the Database
 mongoose.connect(config.database);
@@ -36,8 +35,8 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-//var api = require('api');
-//app.use('/api', api);
+var api = require('./api/routes');
+app.use('/api', api);
 
 //Expresss Routes
 

@@ -4,7 +4,7 @@ import React from 'react';
 
 import connectToStores from 'alt/utils/connectToStores';
 
-var ExerciseActions = require('../../actions/ExerciseActions');
+import ExerciseActions from '../../actions/ExerciseActions';
 
 var SearchBox = React.createClass({
 	handleChange: function() {
@@ -49,6 +49,10 @@ class ExerciseSearch extends React.Component {
 	constructor(props) {
 		super(props);
     	this.state = {showAddExercise: false, search: ""}
+
+    	//Pull down all of the exercises
+    	//ExerciseActions.getAllExercises();
+
     	this.search = this.search.bind(this);
   	}
 

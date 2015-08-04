@@ -10,6 +10,8 @@ var alt = require('../alt');
 var ExerciseActions = (function () {
   function ExerciseActions() {
     _classCallCheck(this, ExerciseActions);
+
+    this.generateActions('getAllExercisesSuccess'); //Creates a default this.dispatch() version
   }
 
   _createClass(ExerciseActions, [{
@@ -20,7 +22,22 @@ var ExerciseActions = (function () {
   }, {
     key: 'fetchExercises',
     value: function fetchExercises(str) {
+      this.actions.getAllExercises();
       this.dispatch(str);
+    }
+  }, {
+    key: 'getAllExercises',
+    value: function getAllExercises() {
+      var _this = this;
+
+      $.ajax({
+        type: 'GET',
+        url: '/api/exercises'
+      }).done(function (data) {
+        _this.actions.getAllExercisesSuccess(data);
+      }).fail(function (jqXhr) {
+        //
+      });
     }
   }]);
 
@@ -373,7 +390,9 @@ var _altUtilsConnectToStores = require('alt/utils/connectToStores');
 
 var _altUtilsConnectToStores2 = _interopRequireDefault(_altUtilsConnectToStores);
 
-var ExerciseActions = require('../../actions/ExerciseActions');
+var _actionsExerciseActions = require('../../actions/ExerciseActions');
+
+var _actionsExerciseActions2 = _interopRequireDefault(_actionsExerciseActions);
 
 var SearchBox = _react2['default'].createClass({
 	displayName: 'SearchBox',
@@ -431,6 +450,10 @@ var ExerciseSearch = (function (_React$Component) {
 
 		_get(Object.getPrototypeOf(_ExerciseSearch.prototype), 'constructor', this).call(this, props);
 		this.state = { showAddExercise: false, search: "" };
+
+		//Pull down all of the exercises
+		//ExerciseActions.getAllExercises();
+
 		this.search = this.search.bind(this);
 	}
 
@@ -442,7 +465,7 @@ var ExerciseSearch = (function (_React$Component) {
 				this.setState({ showAddExercise: true });
 			}
 			this.setState({ search: input });
-			ExerciseActions.fetchExercises(input);
+			_actionsExerciseActions2['default'].fetchExercises(input);
 		}
 	}, {
 		key: 'render',
@@ -1064,14 +1087,15 @@ var ExerciseStore = (function () {
   function ExerciseStore() {
     _classCallCheck(this, ExerciseStore);
 
-    this.exercises = [{ name: "Push Ups" }, { name: "Pull Ups" }];
-    this.searchExercises = this.exercises;
+    this.exercises = [];
+    this.searchExercises = [];
 
     this.counter = 0;
 
     this.bindListeners({
       addExercise: ExerciseActions.ADD_EXERCISE,
-      fetchExercises: ExerciseActions.FETCH_EXERCISES
+      fetchExercises: ExerciseActions.FETCH_EXERCISES,
+      getAllExercises: ExerciseActions.GET_ALL_EXERCISES_SUCCESS
     });
     /*
         this.exportPublicMethods({
@@ -1087,11 +1111,17 @@ var ExerciseStore = (function () {
       this.exercises[this.counter++] = { name: exercise };
     }
   }, {
+    key: 'getAllExercises',
+    value: function getAllExercises(exercises) {
+      this.exercises = exercises;
+    }
+  }, {
     key: 'fetchExercises',
     value: function fetchExercises(str) {
       var length = this.exercises.length;
       this.searchExercises = [];
       for (var i = 0; i < length; ++i) {
+        console.log("Searching");
         if (~this.exercises[i].name.toLowerCase().indexOf(str.toLowerCase())) {
           this.searchExercises[i] = this.exercises[i];
         }
