@@ -28,4 +28,21 @@ router.get('/exercises/:id', function(req, res, next) {
   });
 });
 
+import fs from 'fs';
+import parse from 'csv-parse';
+
+/* GET /todos/id */
+router.get('/bank', function(req, res, next) {
+  //var parsed = parse('./bank.csv');
+  //res.json(parsed);
+
+  var parser = parse({delimiter: ','}, function(err, data){
+    res.json(data);
+  });
+
+  fs.createReadStream(__dirname+'/bank.csv').pipe(parser);
+});
+
+
+
 module.exports = router;

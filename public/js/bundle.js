@@ -3,6 +3,52 @@
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var BankActions = (function () {
+  function BankActions() {
+    _classCallCheck(this, BankActions);
+
+    this.generateActions('getAllTransactionsSuccess');
+  }
+
+  _createClass(BankActions, [{
+    key: 'getAllTransactions',
+    value: function getAllTransactions() {
+      var _this = this;
+
+      $.ajax({
+        type: 'GET',
+        url: '/api/bank'
+      }).done(function (data) {
+        _this.actions.getAllTransactionsSuccess(data);
+      }).fail(function (jqXhr) {
+        //
+      });
+    }
+  }, {
+    key: 'updateTransaction',
+    value: function updateTransaction(index, cat) {
+      this.dispatch({ 'index': index, 'cat': cat });
+    }
+  }]);
+
+  return BankActions;
+})();
+
+module.exports = _alt2['default'].createActions(BankActions);
+
+},{"../alt":4}],2:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var alt = require('../alt');
@@ -46,7 +92,7 @@ var ExerciseActions = (function () {
 
 module.exports = alt.createActions(ExerciseActions);
 
-},{"../alt":3}],2:[function(require,module,exports){
+},{"../alt":4}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -83,7 +129,7 @@ var WorkoutActions = (function () {
 
 module.exports = alt.createActions(WorkoutActions);
 
-},{"../alt":3}],3:[function(require,module,exports){
+},{"../alt":4}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -99,7 +145,7 @@ var _alt2 = _interopRequireDefault(_alt);
 exports['default'] = new _alt2['default']();
 module.exports = exports['default'];
 
-},{"alt":"alt"}],4:[function(require,module,exports){
+},{"alt":"alt"}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -124,7 +170,7 @@ var _AppNodeJs = require('./AppNode.js');
 
 var _AppNodeJs2 = _interopRequireDefault(_AppNodeJs);
 
-var appList = [{ name: "Workout", route: "workout" }];
+var appList = [{ name: "Workout", route: "workout" }, { name: "Bank", route: "bank" }];
 
 var AppList = (function (_React$Component) {
   _inherits(AppList, _React$Component);
@@ -185,7 +231,7 @@ module.exports = AppList;
 */
 module.exports = exports['default'];
 
-},{"./AppNode.js":5,"react":"react"}],5:[function(require,module,exports){
+},{"./AppNode.js":6,"react":"react"}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -238,7 +284,7 @@ var AppNode = (function (_React$Component) {
 exports['default'] = AppNode;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -266,7 +312,7 @@ var Footer = React.createClass({
 //This is what is returned
 module.exports = Footer;
 
-},{"react":"react"}],7:[function(require,module,exports){
+},{"react":"react"}],8:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -306,7 +352,7 @@ var Header = React.createClass({
 //This is what is returned
 module.exports = Header;
 
-},{"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -361,7 +407,227 @@ var LifeApp = (function (_React$Component) {
 exports['default'] = LifeApp;
 module.exports = exports['default'];
 
-},{"./Footer.jsx":6,"./Header.jsx":7,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"./Footer.jsx":7,"./Header.jsx":8,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
+
+var _altUtilsConnectToStores = require('alt/utils/connectToStores');
+
+var _altUtilsConnectToStores2 = _interopRequireDefault(_altUtilsConnectToStores);
+
+var _storesBankStore = require('../../stores/BankStore');
+
+var _storesBankStore2 = _interopRequireDefault(_storesBankStore);
+
+var _actionsBankActions = require('../../actions/BankActions');
+
+var _actionsBankActions2 = _interopRequireDefault(_actionsBankActions);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var TransactionNode = (function (_React$Component) {
+	_inherits(TransactionNode, _React$Component);
+
+	function TransactionNode(props) {
+		_classCallCheck(this, TransactionNode);
+
+		_get(Object.getPrototypeOf(TransactionNode.prototype), 'constructor', this).call(this, props);
+
+		this.evalCategory = this.evalCategory.bind(this);
+	}
+
+	_createClass(TransactionNode, [{
+		key: 'evalCategory',
+		value: function evalCategory() {
+			switch (this.props.cat) {
+				case "3":
+					return 'blue';
+				default:
+					return 'sky';
+			}
+		}
+	}, {
+		key: 'handleClick',
+		value: function handleClick(num) {
+			this.props.handleClick(this.props.index, num);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var dyClass = this.evalCategory(); //dynamic class
+			var classes = (0, _classnames2['default'])(dyClass, {
+				'transactionNode': true,
+				white: this.props.index % 2 == 0
+			});
+
+			return _react2['default'].createElement(
+				'div',
+				{ className: classes },
+				_react2['default'].createElement(
+					'span',
+					{ className: 'date' },
+					this.props.date
+				),
+				_react2['default'].createElement(
+					'span',
+					{ className: 'name' },
+					this.props.name,
+					' ',
+					this.props.cat
+				),
+				_react2['default'].createElement(
+					'span',
+					{ className: 'amount' },
+					this.props.amount
+				),
+				_react2['default'].createElement(
+					'span',
+					{ className: 'buttons' },
+					_react2['default'].createElement(
+						'button',
+						{ type: 'button', onClick: this.handleClick.bind(this, 3) },
+						'Food'
+					),
+					_react2['default'].createElement(
+						'button',
+						{ type: 'button' },
+						'Product'
+					),
+					_react2['default'].createElement(
+						'button',
+						{ type: 'button' },
+						'Expense'
+					),
+					_react2['default'].createElement(
+						'button',
+						{ type: 'button' },
+						'Income'
+					)
+				),
+				_react2['default'].createElement('div', { className: 'clear' })
+			);
+		}
+	}]);
+
+	return TransactionNode;
+})(_react2['default'].Component);
+
+var BankList = (function (_React$Component2) {
+	_inherits(BankList, _React$Component2);
+
+	function BankList(props) {
+		_classCallCheck(this, BankList);
+
+		_get(Object.getPrototypeOf(BankList.prototype), 'constructor', this).call(this, props);
+
+		this.state = { sum: 0 };
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	_createClass(BankList, [{
+		key: 'handleClick',
+		value: function handleClick(index, cat) {
+			_actionsBankActions2['default'].updateTransaction(index, cat);
+			console.log(this.props.transactions);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this = this;
+
+			return _react2['default'].createElement(
+				'div',
+				{ className: 'transactionList' },
+				this.props.transactions.map(function (t, i) {
+					return _react2['default'].createElement(TransactionNode, { handleClick: _this.handleClick, index: i, cat: t[5], date: t[0], ref: t[1], name: t[2], location: t[3], amount: t[4] });
+				})
+			);
+		}
+	}]);
+
+	return BankList;
+})(_react2['default'].Component);
+
+var BankApp = (function (_React$Component3) {
+	_inherits(BankApp, _React$Component3);
+
+	function BankApp(props) {
+		_classCallCheck(this, _BankApp);
+
+		_get(Object.getPrototypeOf(_BankApp.prototype), 'constructor', this).call(this, props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	_createClass(BankApp, [{
+		key: 'handleClick',
+		value: function handleClick() {
+			_actionsBankActions2['default'].getAllTransactions();
+			console.log(this.props);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2['default'].createElement(
+				'div',
+				null,
+				_react2['default'].createElement(
+					'button',
+					{ onClick: this.handleClick, type: 'button' },
+					'Button'
+				),
+				_react2['default'].createElement(BankList, this.props),
+				_react2['default'].createElement(
+					'form',
+					null,
+					_react2['default'].createElement('input', { type: 'file' })
+				),
+				_react2['default'].createElement(_reactRouter.RouteHandler, null)
+			);
+		}
+	}], [{
+		key: 'getStores',
+		value: function getStores() {
+			return [_storesBankStore2['default']];
+		}
+	}, {
+		key: 'getPropsFromStores',
+		value: function getPropsFromStores() {
+			return _storesBankStore2['default'].getState();
+		}
+	}]);
+
+	var _BankApp = BankApp;
+	BankApp = (0, _altUtilsConnectToStores2['default'])(BankApp) || BankApp;
+	return BankApp;
+})(_react2['default'].Component);
+
+;
+
+exports['default'] = BankApp;
+module.exports = exports['default'];
+
+},{"../../actions/BankActions":1,"../../stores/BankStore":17,"alt/utils/connectToStores":21,"classnames":23,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -498,7 +764,7 @@ var ExerciseSearch = (function (_React$Component) {
 exports['default'] = ExerciseSearch;
 module.exports = exports['default'];
 
-},{"../../actions/ExerciseActions":1,"../../stores/ExerciseStore":15,"alt/utils/connectToStores":18,"react":"react"}],10:[function(require,module,exports){
+},{"../../actions/ExerciseActions":2,"../../stores/ExerciseStore":18,"alt/utils/connectToStores":21,"react":"react"}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -809,7 +1075,7 @@ var Workout = (function (_React$Component6) {
 exports['default'] = Workout;
 module.exports = exports['default'];
 
-},{"../../actions/WorkoutActions":2,"../../stores/WorkoutStore":17,"alt/utils/connectToStores":18,"react":"react","react-router":"react-router"}],11:[function(require,module,exports){
+},{"../../actions/WorkoutActions":3,"../../stores/WorkoutStore":20,"alt/utils/connectToStores":21,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -828,23 +1094,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 var _react = require('react');
 
-//import AltContainer from 'alt';
-
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
 var _storesWorkoutAppStore = require('../../stores/WorkoutAppStore');
-
-/*class WorkoutApp extends React.Component {
-  render() {
-    return (
-      <AltContainer store={WorkoutAppStore}>
-          <RouteHandler />
-      </AltContainer>
-    );
-  }
-}; */
 
 var _storesWorkoutAppStore2 = _interopRequireDefault(_storesWorkoutAppStore);
 
@@ -874,24 +1128,9 @@ var WorkoutApp = (function (_React$Component) {
 ;
 
 exports['default'] = WorkoutApp;
-
-/*
-
-AltContainer is not working nicely with RouteHandler??
-
-class WorkoutApp extends React.Component {
-  render() {
-    return (
-      <AltContainer store={WorkoutAppStore}>
-      	<RouteHandler {...this.props} />
-      </AltContainer>
-    );
-  }
-};
-*/
 module.exports = exports['default'];
 
-},{"../../stores/WorkoutAppStore":16,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
+},{"../../stores/WorkoutAppStore":19,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -953,7 +1192,7 @@ var Workout = (function (_React$Component) {
 exports['default'] = Workout;
 module.exports = exports['default'];
 
-},{"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -974,44 +1213,11 @@ _reactRouter2['default'].run(_routes2['default'], _reactRouter2['default'].Histo
   _react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./routes":14,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
-/*
-import React from 'react';
-import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
-
-
-import App from './components/App';
-import Home from './components/Home';
-
-import LifeApp from './components/LifeApp';
-import AppList from './components/AppList';
-
-import WorkoutApp from './components/workout/WorkoutApp.js';
-import WorkoutHome from './components/workout/WorkoutHome.js';
-import Workout from './components/workout/Workout.js';
-import ExerciseSearch from './components/exercise/ExerciseSearch.js';
-
-var routes = (
-    <Route name="home" path='/' handler={LifeApp}>
-        <DefaultRoute name="appList" handler={AppList} />
-
-        <Route name="workout" path="workout-app" handler={WorkoutApp} >
-            <DefaultRoute name="workoutHome" handler={WorkoutHome} />
-            <Route name="currentWorkout" path="workout" handler={Workout} />
-            <Route name="exerciseSearch" handler={ExerciseSearch} />
-        </Route>
-        
-        
-    </Route>
-);
-*/
-
-//OLD VERSION
-
+},{"./routes":16,"react":"react","react-router":"react-router"}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1027,8 +1233,6 @@ var _componentsLifeApp = require('./components/LifeApp');
 var _componentsLifeApp2 = _interopRequireDefault(_componentsLifeApp);
 
 var _componentsAppList = require('./components/AppList');
-
-//This has the error
 
 var _componentsAppList2 = _interopRequireDefault(_componentsAppList);
 
@@ -1048,31 +1252,74 @@ var _componentsExerciseExerciseSearchJs = require('./components/exercise/Exercis
 
 var _componentsExerciseExerciseSearchJs2 = _interopRequireDefault(_componentsExerciseExerciseSearchJs);
 
+var _componentsBankBankApp = require('./components/bank/BankApp');
+
+var _componentsBankBankApp2 = _interopRequireDefault(_componentsBankBankApp);
+
+var COMPONENTS_PATH = './components';
+
 exports['default'] = _react2['default'].createElement(
+  _reactRouter.Route,
+  { name: 'home', path: '/', handler: _componentsLifeApp2['default'] },
+  _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsAppList2['default'] }),
+  _react2['default'].createElement(
     _reactRouter.Route,
-    { name: 'home', path: '/', handler: _componentsLifeApp2['default'] },
-    _react2['default'].createElement(_reactRouter.DefaultRoute, { handler: _componentsAppList2['default'] }),
-    _react2['default'].createElement(
-        _reactRouter.Route,
-        { name: 'workout', path: 'workout-app', handler: _componentsWorkoutWorkoutAppJs2['default'] },
-        _react2['default'].createElement(_reactRouter.DefaultRoute, { name: 'workoutHome', handler: _componentsWorkoutWorkoutHomeJs2['default'] }),
-        _react2['default'].createElement(_reactRouter.Route, { name: 'currentWorkout', path: 'workout', handler: _componentsWorkoutWorkoutJs2['default'] }),
-        _react2['default'].createElement(_reactRouter.Route, { name: 'exerciseSearch', handler: _componentsExerciseExerciseSearchJs2['default'] })
-    )
+    { name: 'workout', path: 'workout-app', handler: _componentsWorkoutWorkoutAppJs2['default'] },
+    _react2['default'].createElement(_reactRouter.DefaultRoute, { name: 'workoutHome', handler: _componentsWorkoutWorkoutHomeJs2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { name: 'currentWorkout', path: 'workout', handler: _componentsWorkoutWorkoutJs2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { name: 'exerciseSearch', handler: _componentsExerciseExerciseSearchJs2['default'] })
+  ),
+  _react2['default'].createElement(_reactRouter.Route, { name: 'bank', path: 'bank-app', handler: _componentsBankBankApp2['default'] })
 );
-
-//
-//<Route name="currentWorkout" path="workout" handler={Workout} />
-//<Route name="exerciseSearch" handler={ExerciseSearch} />
-
-/*
-export default (
-  <Route name="home" path='/' handler={App}>
-  </Route>
-); */
 module.exports = exports['default'];
 
-},{"./components/AppList":4,"./components/LifeApp":8,"./components/exercise/ExerciseSearch.js":9,"./components/workout/Workout.js":10,"./components/workout/WorkoutApp.js":11,"./components/workout/WorkoutHome.js":12,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
+},{"./components/AppList":5,"./components/LifeApp":9,"./components/bank/BankApp":10,"./components/exercise/ExerciseSearch.js":11,"./components/workout/Workout.js":12,"./components/workout/WorkoutApp.js":13,"./components/workout/WorkoutHome.js":14,"react":"react","react-router":"react-router"}],17:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _alt = require('../alt');
+
+var _alt2 = _interopRequireDefault(_alt);
+
+var _actionsBankActions = require('../actions/BankActions');
+
+var _actionsBankActions2 = _interopRequireDefault(_actionsBankActions);
+
+var BankStore = (function () {
+	function BankStore() {
+		_classCallCheck(this, BankStore);
+
+		this.transactions = [];
+
+		this.bindListeners({
+			getAllTransactions: _actionsBankActions2['default'].GET_ALL_TRANSACTIONS_SUCCESS,
+			updateTransaction: _actionsBankActions2['default'].UPDATE_TRANSACTION
+		});
+	}
+
+	_createClass(BankStore, [{
+		key: 'updateTransaction',
+		value: function updateTransaction(transaction) {
+			this.transactions[transaction.index].cat = transaction.cat;
+		}
+	}, {
+		key: 'getAllTransactions',
+		value: function getAllTransactions(transactions) {
+			this.transactions = transactions;
+		}
+	}]);
+
+	return BankStore;
+})();
+
+module.exports = _alt2['default'].createStore(BankStore, 'BankStore');
+
+},{"../actions/BankActions":1,"../alt":4}],18:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1134,7 +1381,7 @@ var ExerciseStore = (function () {
 
 module.exports = alt.createStore(ExerciseStore, 'ExerciseStore');
 
-},{"../actions/ExerciseActions":1,"../alt":3}],16:[function(require,module,exports){
+},{"../actions/ExerciseActions":2,"../alt":4}],19:[function(require,module,exports){
 'use strict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -1170,7 +1417,7 @@ var WorkoutAppStore = function WorkoutAppStore() {
 
 module.exports = alt.createStore(WorkoutAppStore, 'WorkoutAppStore');
 
-},{"../alt":3}],17:[function(require,module,exports){
+},{"../alt":4}],20:[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -1221,7 +1468,7 @@ var WorkoutStore = (function () {
 
 module.exports = alt.createStore(WorkoutStore, 'WorkoutStore');
 
-},{"../actions/WorkoutActions":2,"../alt":3}],18:[function(require,module,exports){
+},{"../actions/WorkoutActions":3,"../alt":4}],21:[function(require,module,exports){
 /**
  * 'Higher Order Component' that controls the props of a wrapped
  * component via stores.
@@ -1336,7 +1583,7 @@ function connectToStores(Spec) {
 
 exports['default'] = connectToStores;
 module.exports = exports['default'];
-},{"./functions":19,"react":"react"}],19:[function(require,module,exports){
+},{"./functions":22,"react":"react"}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1373,4 +1620,55 @@ function assign(target) {
   }, source);
   return target;
 }
-},{}]},{},[13]);
+},{}],23:[function(require,module,exports){
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+(function () {
+	'use strict';
+
+	function classNames () {
+
+		var classes = '';
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if ('string' === argType || 'number' === argType) {
+				classes += ' ' + arg;
+
+			} else if (Array.isArray(arg)) {
+				classes += ' ' + classNames.apply(null, arg);
+
+			} else if ('object' === argType) {
+				for (var key in arg) {
+					if (arg.hasOwnProperty(key) && arg[key]) {
+						classes += ' ' + key;
+					}
+				}
+			}
+		}
+
+		return classes.substr(1);
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (typeof define === 'function' && typeof define.amd === 'object' && define.amd){
+		// AMD. Register as an anonymous module.
+		define(function () {
+			return classNames;
+		});
+	} else {
+		window.classNames = classNames;
+	}
+
+}());
+
+},{}]},{},[15]);

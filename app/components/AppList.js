@@ -2,7 +2,8 @@ import React from 'react';
 import AppNode from './AppNode.js';
 
 var appList = [
-  { name: "Workout", route: "workout"}
+  { name: "Workout", route: "workout" },
+  { name: "Bank", route: "bank" }
 ];
 
 class AppList extends React.Component {

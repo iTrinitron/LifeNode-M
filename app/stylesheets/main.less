@@ -76,6 +76,58 @@ body {
   display: none !important;
 }
 
+.transactionList {
+  background: gray;
+  width: 900px; 
+}
+
+.transactionNode {
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 20px;
+  height: 20px;
+  text-align: center;
+
+  &.white {
+    border-bottom: 1px solid black;
+  }
+
+  &.sky {
+    background: black;
+    color: white;
+  }
+
+  span {
+    min-height: 1px; //enforces empty blocks to have width
+    display: block;
+    float: left;
+  }
+
+  button {
+
+  }
+
+  .date {
+    min-width: 10%;
+    width: 10%;
+  }
+
+  .name {
+    min-width: 50%;
+    width: 50%;
+  }
+
+  .amount {
+    min-width: 10%;
+    width: 10%;
+  }
+
+  .buttons {
+    min-width: 30%;
+    width: 30%;
+  }
+}
+
 
 /*
 .col-xs-12;

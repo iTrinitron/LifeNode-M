@@ -3,6 +3,7 @@ var alt = require('../alt');
 class ExerciseActions {
 	constructor() {
 		this.generateActions('getAllExercisesSuccess');  //Creates a default this.dispatch() version 
+    
 	}
 
   addExercise(exercise) {

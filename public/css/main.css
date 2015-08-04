@@ -6776,6 +6776,45 @@ body {
 .hidden {
   display: none !important;
 }
+.transactionList {
+  background: gray;
+  width: 900px;
+}
+.transactionNode {
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 20px;
+  height: 20px;
+  text-align: center;
+}
+.transactionNode.white {
+  border-bottom: 1px solid black;
+}
+.transactionNode.sky {
+  background: black;
+  color: white;
+}
+.transactionNode span {
+  min-height: 1px;
+  display: block;
+  float: left;
+}
+.transactionNode .date {
+  min-width: 10%;
+  width: 10%;
+}
+.transactionNode .name {
+  min-width: 50%;
+  width: 50%;
+}
+.transactionNode .amount {
+  min-width: 10%;
+  width: 10%;
+}
+.transactionNode .buttons {
+  min-width: 30%;
+  width: 30%;
+}
 /*
 .col-xs-12;
   .col-md-8;
